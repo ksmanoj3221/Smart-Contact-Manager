@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base::parent(~{::#content}, ~{::title}, ~{::script})}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About</title>
 </head>
 
 <body>
-    <div th:insert="~{base::parent}"></div>
-    <div th:insert="${isLoggedIn} ? ~{base::logged} : ~{base::parent} "></div>
+    <div id="content">
+        <h1>About Page</h1>
+    </div>
+    <script>console.log("About Page")</script>
 </body>
 
 </html>
