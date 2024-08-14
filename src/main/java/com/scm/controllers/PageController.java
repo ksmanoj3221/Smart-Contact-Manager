@@ -21,11 +21,31 @@ public class PageController {
         return "about";
     }
 
-    //about
+    //services
     @RequestMapping("/services")
     public String servicePage(Model model){
         model.addAttribute("currentPage", "/services");
         return "services";
     }
+
+    //contact
+    @RequestMapping("/contact")
+    public String contactPage(Model model){
+        model.addAttribute("currentPage", "/contact");
+        return "contact";
+    }
     
+    //Login
+    @RequestMapping("/login")
+    public String loginPage(Model model){
+        model.addAttribute("currentPage", "/login");
+        return "login";
+    }
+
+    //register
+    @RequestMapping("/register")
+    public String signupPage(Model model){
+        model.addAttribute("currentPage", "/register");
+        return "register";
+    }
 }
