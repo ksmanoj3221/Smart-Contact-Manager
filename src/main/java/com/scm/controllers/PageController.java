@@ -1,5 +1,7 @@
 package com.scm.controllers;
 
+import java.lang.reflect.Member;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.scm.entities.User;
 import com.scm.forms.UserForm;
+import com.scm.helpers.Message;
+import com.scm.helpers.MessageType;
 import com.scm.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -68,7 +74,7 @@ public class PageController {
 
     //processing regisger
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute UserForm userForm) {
+    public String processRegister(@ModelAttribute UserForm userForm, HttpSession session) {
         //fecth form data
 
         //UserForm
@@ -106,6 +112,8 @@ public class PageController {
         System.out.println("user saved :");
 
         //message = Registration successful
+        Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
+        session.setAttribute("message", message);
 
         //redirect
         return "redirect:/register";
