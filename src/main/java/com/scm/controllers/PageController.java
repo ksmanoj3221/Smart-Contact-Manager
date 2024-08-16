@@ -27,6 +27,12 @@ public class PageController {
     private UserService userService;
 
 
+    @RequestMapping("/")
+    public String index() {
+        return "redirect:/home";
+    }
+    
+
     @RequestMapping("/home")
     public String home(Model model){
         model.addAttribute("name", "Manoj");
@@ -60,9 +66,11 @@ public class PageController {
     @RequestMapping("/login")
     public String loginPage(Model model){
         model.addAttribute("currentPage", "/login");
+        UserForm userForm = new UserForm();
+        model.addAttribute("userForm", userForm);
         return "login";
     }
-
+    
     //register
     @RequestMapping("/register")
     public String signupPage(Model model){
