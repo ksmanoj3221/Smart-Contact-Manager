@@ -34,3 +34,6 @@ build/
 
 # Node modules
 node_modules/
+
+#due to secret keys
+application.properties
