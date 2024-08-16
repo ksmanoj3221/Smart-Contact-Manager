@@ -34,6 +34,10 @@ public class UserServiceImpl implements UserService{
         user.setUserId(userId);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+        // Ensure enabled is set correctly
+        logger.info("Setting enabled to: " + user.isEnabled());
+        user.setEnabled(true);
+
         //set user role
         user.setRoleList(List.of(AppConstants.ROLE_USER));
         logger.info(user.getProvider().toString());
