@@ -75,7 +75,7 @@ public class SecurityConfig {
             formLogin.loginProcessingUrl("/authenticate");
             // formLogin.successForwardUrl("/user/dashboard");
             formLogin.defaultSuccessUrl("/user/dashboard", true); 
-            formLogin.failureForwardUrl("/login?error=true");
+            // formLogin.failureForwardUrl("/login?error=true");
             // formLogin.defaultSuccessUrl("/home");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
