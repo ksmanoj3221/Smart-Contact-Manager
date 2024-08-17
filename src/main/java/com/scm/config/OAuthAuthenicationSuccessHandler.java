@@ -141,7 +141,7 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
             logger.info("User already exists: " + user.getEmail());
         }
 
-        new DefaultRedirectStrategy().sendRedirect(request, response, "/user/dashboard");
+        new DefaultRedirectStrategy().sendRedirect(request, response, "/user/profile");
 
     }
 

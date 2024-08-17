@@ -20,7 +20,7 @@ import com.scm.services.impl.SecurityCustomUserDetailService;
 
 @Configuration
 public class SecurityConfig {
-   // user create and login using java code with in memory service
+    // user create and login using java code with in memory service
 
     // @Bean
     // public UserDetailsService userDetailsService() {
@@ -50,24 +50,22 @@ public class SecurityConfig {
     @Autowired
     private OAuthAuthenicationSuccessHandler handler;
 
-
-    //configuration: authenticationProvider
+    // configuration: authenticationProvider
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        //user service object
+        // user service object
         daoAuthenticationProvider.setUserDetailsService(userDetailService);
-        
-        //password encoder object
+
+        // password encoder object
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        //url config : public access
+        // url config : public access
         httpSecurity.authorizeHttpRequests(authorize -> {
             // authorize.requestMatchers("/home", "/register", "/services").permitAll();
             authorize.requestMatchers("/user/**").authenticated();
@@ -78,7 +76,7 @@ public class SecurityConfig {
             formLogin.loginPage("/login");
             formLogin.loginProcessingUrl("/authenticate");
             // formLogin.successForwardUrl("/user/dashboard");
-            formLogin.defaultSuccessUrl("/user/dashboard", true); 
+            formLogin.defaultSuccessUrl("/user/profile", true);
             // formLogin.failureForwardUrl("/login?error=true");
             // formLogin.defaultSuccessUrl("/home");
             formLogin.usernameParameter("email");
@@ -90,8 +88,8 @@ public class SecurityConfig {
             logoutForm.logoutUrl("/do-logout");
             logoutForm.logoutSuccessUrl("/login?logout=true");
         });
-        //oauth config
-        httpSecurity.oauth2Login(oauth->{
+        // oauth config
+        httpSecurity.oauth2Login(oauth -> {
             oauth.loginPage("/login");
             oauth.successHandler(handler);
         });
@@ -99,7 +97,7 @@ public class SecurityConfig {
 
     }
 
-     @Bean
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base::parent(~{::#content}, ~{::title}, ~{::script})}">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +8,14 @@
 </head>
 
 <body>
-    <div id=content>
-        <h1>Profile</h1>
+    <div id="content">
+        <h1>Profile Page</h1>
         <h1 data-th-text="${loggedInUser.name}"></h1>
-        <a data-th-href="@{'/do-logout'}" type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Logout</a>
         <a data-th-href="@{'/user/dashboard'}" type="button"
             class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-5 ">Dashboard</a>
+
     </div>
-    <script>
-        console.log("Profile")
-    </script>
+    <script>console.log("Profile Page")</script>
 </body>
 
 </html>
