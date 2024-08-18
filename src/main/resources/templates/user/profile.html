@@ -8,13 +8,21 @@
 </head>
 
 <body>
-    <div id="content">
-        <h1>Profile Page</h1>
-        <h1 data-th-text="${loggedInUser.name}"></h1>
-        <a data-th-href="@{'/user/dashboard'}" type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-5 ">Dashboard</a>
+    <div>
+        <!-- sidebar -->
+        <div id="content" th:if="${loggedInUser}">
+            <div data-th-replace="~{user/sidebar::sidebar}"></div>
+            <div class="sm:pl-64 ">
+                <h1 class=" text-2xl font-bold">Profile Page</h1>
+                <h1 data-th-text="${loggedInUser.name}" class="text-lg mt-2"></h1>
+                <a data-th-href="@{'/user/dashboard'}" type="button"
+                    class="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-5">Dashboard</a>
+            </div>
+
+        </div>
 
     </div>
+
     <script>console.log("Profile Page")</script>
 </body>
 

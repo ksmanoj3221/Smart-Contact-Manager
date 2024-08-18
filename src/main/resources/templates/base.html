@@ -14,7 +14,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="dark:bg-gray-900 dark:text-white bg-gray-100">
+<body class="dark:text-white bg-gray-100 dark:bg-[#171F29]">
     <!-- common header -->
     <!--  user is logged in : navbar -->
     <div th:if="${loggedInUser}">
@@ -25,6 +25,7 @@
     <div th:unless="${loggedInUser}">
         <div data-th-replace="~{navbar :: navbar}"></div>
     </div>
+
 
 
 
