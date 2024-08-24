@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::parent(~{::#content}, ~{::title}, ~{::script})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+</head>
+
+<body>
+    <div>
+        <!-- sidebar -->
+        <div id="content">
+            <div th:if="${loggedInUser}">
+                <div data-th-replace="~{user/sidebar::sidebar}"></div>
+            </div>
+            <div class="sm:pl-64 ">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-3"></div>
+                    <div class="col-span-12 md:col-span-6">
+                        <div
+                            class="card block  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-900 dark:border-gray-800 dark:hover:bg-gray-800">
+                            <h1 class="text-2xl font-semibold">Add New Contact</h1>
+                            <p class="text-gray-300">
+                                Manage your contacts in the cloud and email clients directly from SCM. One click,
+                                endless possibilities!
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>console.log("Profile Page")</script>
+</body>
+
+</html>
