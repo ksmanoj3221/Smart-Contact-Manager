@@ -25,7 +25,8 @@
                                 One click, endless possibilities!
                             </p>
 
-                            <form action="" class="mt-8">
+                            <form action="" class="mt-8" data-th-action="@{'/user/contacts/add'}" method="post"
+                                data-th-object="${contactForm}">
                                 <!-- name -->
                                 <div class="mb-3">
                                     <label for="name"
@@ -37,7 +38,7 @@
                                             class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                             <i class="fa-solid fa-user"></i>
                                         </div>
-                                        <input type="text" id="name"
+                                        <input data-th-field="*{name}" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="name">
                                     </div>
@@ -54,7 +55,7 @@
                                             class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                             <i class="fa-regular fa-envelope"></i>
                                         </div>
-                                        <input type="text" id="email"
+                                        <input data-th-field="*{email}" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="name@example.com">
                                     </div>
@@ -62,7 +63,7 @@
 
                                 <!-- phone number -->
                                 <div class="mb-3">
-                                    <label for="phone"
+                                    <label for="phoneNumber"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
                                         Phone
                                     </label>
@@ -71,7 +72,7 @@
                                             class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                             <i class="fa-solid fa-phone"></i>
                                         </div>
-                                        <input type="text" id="phone"
+                                        <input data-th-field="*{phoneNumber}" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="83558xxxxx">
                                     </div>
@@ -84,7 +85,7 @@
                                         Address
                                     </label>
                                     <div class="relative mb-6">
-                                        <textarea id="address" rows="4"
+                                        <textarea data-th-field="*{address}" rows="4"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Address..."></textarea>
                                     </div>
@@ -97,7 +98,7 @@
                                         Description
                                     </label>
                                     <div class="relative mb-6">
-                                        <textarea id="description" rows="4"
+                                        <textarea data-th-field="*{description}" rows="4"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Write your thoughts here..."></textarea>
                                     </div>
@@ -114,7 +115,7 @@
                                                     class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                                     <i class="fa-solid w-4 h-4 fa-earth-americas"></i>
                                                 </div>
-                                                <input
+                                                <input data-th-field="*{websiteLink}"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     placeholder="https://website.com/" />
                                             </div>
@@ -128,7 +129,7 @@
                                                     class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                                     <i class="fa-brands w-4 h-4 fa-linkedin"></i>
                                                 </div>
-                                                <input type="text"
+                                                <input type="text" data-th-field="*{linkedInLink}"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     placeholder="https://linkedin.com/" />
                                             </div>
@@ -147,9 +148,9 @@
 
                                 <!-- favorite -->
                                 <div class="flex items-center mb-3">
-                                    <input id="default-checkbox" type="checkbox" value=""
+                                    <input data-th-field="*{favorite}" type="checkbox" id="favorite"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="default-checkbox"
+                                    <label for="favorite"
                                         class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                         Favorite ?</label>
                                 </div>
