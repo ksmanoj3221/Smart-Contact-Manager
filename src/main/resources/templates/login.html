@@ -42,7 +42,7 @@
                                 Email</label>
                             <input name="email" type="email" id="email" data-th-field="*{email}"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                                placeholder="abc@gmail.com" required />
+                                placeholder="abc@gmail.com" required autocomplete="username" />
                             <p data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"
                                 class="text-red-600 px-1 py-2"></p>
                         </div>
@@ -53,7 +53,7 @@
                                 Password</label>
                             <input name="password" type="password" id="password" data-th-field="*{password}"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                                required />
+                                required autocomplete="current-password" />
                             <p data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}"
                                 class="text-red-600 px-1 py-2"></p>
                         </div>
