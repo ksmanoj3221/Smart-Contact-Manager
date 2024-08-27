@@ -56,9 +56,11 @@ public class ContactController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String saveContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult result,
             Authentication authentication, HttpSession session) {
+
         // process the form data
 
-        // validate the form
+        // 1 validate form
+
         if (result.hasErrors()) {
 
             result.getAllErrors().forEach(error -> logger.info(error.toString()));
@@ -74,13 +76,11 @@ public class ContactController {
         // form ---> contact
 
         User user = userService.getUserByEmail(username);
+        // 2 process the contact picture
 
-        // image
-        logger.info("file information : {}", contactForm.getContactImage().getOriginalFilename());
+        // image process
 
-        String filename = UUID.randomUUID().toString();
-        String fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
-
+        // uplod karne ka code
         Contact contact = new Contact();
         contact.setName(contactForm.getName());
         contact.setFavorite(contactForm.isFavorite());
@@ -91,11 +91,21 @@ public class ContactController {
         contact.setUser(user);
         contact.setLinkedInLink(contactForm.getLinkedInLink());
         contact.setWebsiteLink(contactForm.getWebsiteLink());
-        contact.setPicture(fileURL);
-        contact.setCloudinaryImagePublicId(filename);
-        contactService.save(contact);
 
+        if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
+            String filename = UUID.randomUUID().toString();
+            String fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
+            contact.setPicture(fileURL);
+            contact.setCloudinaryImagePublicId(filename);
+
+        }
+        contactService.save(contact);
         System.out.println(contactForm);
+
+        // 3 set the contact picture url
+
+        // 4 `set message to be displayed on the view
+
         session.setAttribute("message",
                 Message.builder()
                         .content("You have successfully added a new contact")
@@ -103,6 +113,7 @@ public class ContactController {
                         .build());
 
         return "redirect:/user/contacts/add";
+
     }
 
     @RequestMapping
@@ -119,6 +130,7 @@ public class ContactController {
         Page<Contact> pageContact = contactService.getByUser(user, page, size, sortBy, direction);
 
         model.addAttribute("pageContact", pageContact);
+        model.addAttribute("pageSize", AppConstants.PAGE_SIZE);
 
         return "user/contacts";
     }
