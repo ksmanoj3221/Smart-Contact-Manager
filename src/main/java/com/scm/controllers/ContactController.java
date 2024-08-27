@@ -116,9 +116,9 @@ public class ContactController {
 
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
-        Page<Contact> contacts = contactService.getByUser(user, page, size, sortBy, direction);
+        Page<Contact> pageContact = contactService.getByUser(user, page, size, sortBy, direction);
 
-        model.addAttribute("contacts", contacts);
+        model.addAttribute("pageContact", pageContact);
 
         return "user/contacts";
     }
