@@ -801,6 +801,10 @@ video {
   height: calc(100% - 1rem);
 }
 
+.h-32 {
+  height: 8rem;
+}
+
 .max-h-52 {
   max-height: 13rem;
 }
@@ -871,6 +875,10 @@ video {
 
 .w-8 {
   width: 2rem;
+}
+
+.w-32 {
+  width: 8rem;
 }
 
 .max-w-screen-xl {
@@ -1463,6 +1471,12 @@ video {
 
 .transition-transform {
   transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
