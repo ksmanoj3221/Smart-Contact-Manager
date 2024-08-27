@@ -84,4 +84,9 @@ public class ContactServiceImpl implements ContactService {
         throw new UnsupportedOperationException("Unimplemented method 'getByUser'");
     }
 
+    @Override
+    public List<Contact> getByUser(User user) {
+        return contactRepo.findByUser(user);
+    }
+
 }

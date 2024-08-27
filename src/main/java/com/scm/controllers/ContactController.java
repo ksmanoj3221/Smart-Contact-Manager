@@ -102,7 +102,13 @@ public class ContactController {
     }
 
     @RequestMapping
-    public String viewContacts() {
+    public String viewContacts(Authentication authentication) {
+        // load all the user contacts
+
+        String username = Helper.getEmailOfLoggedInUser(authentication);
+        User user = userService.getUserByEmail(username);
+        contactService.getByUser(user);
+
         return "user/contacts";
     }
 
