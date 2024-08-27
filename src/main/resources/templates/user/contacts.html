@@ -149,9 +149,10 @@
                                             <a href="">
                                                 <i class="fa-solid fa-trash-can w-6 h-6"></i>
                                             </a>
-                                            <a href="">
-                                                <i class="fa-solid fa-eye w-6 h-6"></i>
-                                            </a>
+                                            <!-- viewcontact -->
+                                            <button th:onclick="openContactModal()">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
                                         </td>
                                     </tr>
 
@@ -198,13 +199,13 @@
                         It seems like you haven't added any contacts yet. Start by adding a new contact.
                     </p>
                 </div>
-
+                <div data-th-replace="~{ user/contact_modal :: contact}"></div>
 
             </div>
 
         </div>
 
-        <script>console.log("Profile Page")</script>
+        <script data-th-src="@{'/js/contacts.js'}"></script>
 </body>
 
 </html>
