@@ -1,5 +1,6 @@
 package com.scm.controllers;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -102,12 +103,14 @@ public class ContactController {
     }
 
     @RequestMapping
-    public String viewContacts(Authentication authentication) {
+    public String viewContacts(Model model, Authentication authentication) {
         // load all the user contacts
 
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
-        contactService.getByUser(user);
+        List<Contact> contacts = contactService.getByUser(user);
+
+        model.addAttribute("contacts", contacts);
 
         return "user/contacts";
     }
