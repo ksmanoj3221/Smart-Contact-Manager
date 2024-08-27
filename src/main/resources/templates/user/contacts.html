@@ -13,10 +13,24 @@
         <div id="content" th:if="${loggedInUser}">
             <div data-th-replace="~{user/sidebar::sidebar}"></div>
             <div class="sm:pl-64 ">
-                <h1 class=" text-2xl font-bold">Contacts</h1>
+
+                <!-- heading -->
+                <div
+                    class="block w-full p-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-3 text-center flex flex-col items-center">
+                    <h5 class=" text-2xl font-bold tracking-tight text-gray-900 dark:text-white">All Your Contacts
+                    </h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Organized, updated, and always within reach.
+                    </p>
+                </div>
+
+
+                <!-- <h1
+                    class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                    All Your Contacts</h1>
+                <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+                    Organized, updated, and always within reach.</p> -->
+
                 <div class="contacts_container">
-
-
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <div
                             class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
@@ -141,9 +155,15 @@
 
                                     <!-- action  -->
                                     <td class="px-6 py-4">
-                                        <i class="fa-regular fa-pen-to-square h-6 w-6"></i>
-                                        <i class="fa-solid fa-trash-can w-6 h-6"></i>
-                                        <i class="fa-solid fa-eye w-6 h-6"></i>
+                                        <a href="">
+                                            <i class="fa-regular fa-pen-to-square h-6 w-6"></i>
+                                        </a>
+                                        <a href="">
+                                            <i class="fa-solid fa-trash-can w-6 h-6"></i>
+                                        </a>
+                                        <a href="">
+                                            <i class="fa-solid fa-eye w-6 h-6"></i>
+                                        </a>
                                     </td>
                                 </tr>
 
