@@ -101,4 +101,9 @@ public class ContactController {
         return "redirect:/user/contacts/add";
     }
 
+    @RequestMapping
+    public String viewContacts() {
+        return "user/contacts";
+    }
+
 }
