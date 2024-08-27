@@ -78,16 +78,19 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
 
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 w-1/5">
                                         Name
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 w-1/5 text-center">
+                                        Favorite
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 ">
                                         Phone
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Links
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 4">
                                         Action
                                     </th>
                                 </tr>
@@ -95,27 +98,52 @@
                             <tbody>
                                 <tr data-th-object="${c}" data-th-each="c : ${contacts}"
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <!-- name and email -->
                                     <th scope="row"
                                         class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                        <img class="w-10 h-10 rounded-full"
+                                        <img class="w-10 h-10 rounded-full" data-th-src="@{*{picture}}"
+                                            onerror="this.src='https://static.vecteezy.com/system/resources/thumbnails/010/260/479/small/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg'"
                                             src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
                                         <div class="ps-3">
-                                            <div class="text-base font-semibold">Neil Sims</div>
-                                            <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                                            <div class="text-base font-semibold" data-th-text="*{name}">Neil Sims</div>
+                                            <div class="font-normal text-gray-500" data-th-text="*{email}">
+                                                neil.sims@flowbite.com</div>
                                         </div>
                                     </th>
-                                    <td class="px-6 py-4">
-                                        React Developer
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center">
-                                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+
+                                    <!-- favorite -->
+                                    <td class="text-center">
+                                        <div data-th-if="*{favorite}">
+                                            <i class="fa-solid w-6 h-6 fa-heart"></i>
                                         </div>
                                     </td>
+
+                                    <!-- phone number -->
                                     <td class="px-6 py-4">
-                                        <a href="#"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
-                                            user</a>
+                                        <i class="fa-solid fa-phone w-4 h-4"></i>
+                                        <span data-th-text="*{phoneNumber}"></span>
+                                    </td>
+
+
+
+                                    <!-- Links  -->
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center">
+                                            <a data-th-href="@{*{websiteLink}}" target="_blank">
+                                                <i class="fa-solid w-6 h-6 fa-globe"></i>
+                                            </a>
+
+                                            <a data-th-href="@{*{linkedInLink}}" target="_blank">
+                                                <i class="fa-brands w-6 h-6 fa-linkedin"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                    <!-- action  -->
+                                    <td class="px-6 py-4">
+                                        <i class="fa-regular fa-pen-to-square h-6 w-6"></i>
+                                        <i class="fa-solid fa-trash-can w-6 h-6"></i>
+                                        <i class="fa-solid fa-eye w-6 h-6"></i>
                                     </td>
                                 </tr>
 
