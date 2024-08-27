@@ -13,6 +13,7 @@
         <div id="content" th:if="${loggedInUser}">
             <div data-th-replace="~{user/sidebar::sidebar}"></div>
             <div class="sm:pl-64 ">
+
                 <!-- heading -->
                 <div
                     class="block w-full p-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-3 text-center flex flex-col items-center">
@@ -174,13 +175,25 @@
                                     </li>
                                 </ul>
                             </nav>
+
+
                         </div>
 
-                        <h1 class="text-center bg-white text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                        <!-- <h1 class="text-center bg-white text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
                             data-th-if="${pageContact.totalElements<=0}">
                             No result found
-                        </h1>
+                        </h1> -->
+
                     </div>
+                    <!-- NO result -->
+                    <!-- As we are already displaying 0 results above no need -->
+                    <!-- <div data-th-if="${pageContact.totalElements<=0}"
+                        class="block w-full p-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-3 text-center flex flex-col items-center mt-4">
+                        <h5 class=" text-2xl font-bold tracking-tight text-gray-800 dark:text-white">No result
+                            found
+                        </h5>
+
+                    </div> -->
 
                 </div>
             </div>
