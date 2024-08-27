@@ -894,6 +894,10 @@ video {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -1194,6 +1198,10 @@ video {
 
 .ps-3 {
   padding-inline-start: 0.75rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-left {
