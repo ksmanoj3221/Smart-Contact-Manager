@@ -36,3 +36,9 @@ function openContactModal() {
 function closeContactModal() {
     contactModal.hide();
 }
+
+async function loadContactdata(id) {
+    console.log(id);
+    const data = await (await fetch(`http://localhost:8081/api/contacts/${id}`)).json();
+    console.log(data);
+}
