@@ -197,6 +197,9 @@ public class ContactController {
     // return "redirect:/user/contacts";
     // }
 
+    // above function used redirect, in which we were not able to view the
+    // confirmation msg of Swal.
+
     @RequestMapping(value = "/delete/{contactId}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<String> deleteContact(@PathVariable("contactId") String contactId) {
