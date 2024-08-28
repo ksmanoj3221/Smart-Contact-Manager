@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -176,12 +178,30 @@ public class ContactController {
         return "user/search";
     }
 
-    // delete contact
-    @RequestMapping("/delete/{contactId}")
-    public String deleteContact(@PathVariable("contactId") String contactId) {
+    // detete contact
+    // @RequestMapping("/delete/{contactId}")
+    // public String deleteContact(
+    // @PathVariable("contactId") String contactId,
+    // HttpSession session) {
+    // contactService.delete(contactId);
+    // logger.info("contactId {} deleted", contactId);
+
+    // session.setAttribute("message",
+    // Message.builder()
+    // .content("Contact is Deleted successfully !! ")
+    // .type(MessageType.green)
+    // .build()
+
+    // );
+
+    // return "redirect:/user/contacts";
+    // }
+
+    @RequestMapping(value = "/delete/{contactId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<String> deleteContact(@PathVariable("contactId") String contactId) {
         contactService.delete(contactId);
         logger.info("contactId {} deleted", contactId);
-        return "redirect:/user/contacts";
+        return ResponseEntity.ok("Contact deleted successfully");
     }
-
 }

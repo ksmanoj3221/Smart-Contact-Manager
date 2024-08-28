@@ -69,6 +69,68 @@ async function loadContactdata(id) {
 
 
 //delete with sweet alert
+// async function deleteContact(id) {
+//     const isDarkMode = document.documentElement.classList.contains('dark'); // Detect dark mode
+
+//     const result = await Swal.fire({
+//         title: 'Do you want to delete the contact?',
+//         showCancelButton: true,
+//         confirmButtonText: 'Delete',
+//         cancelButtonText: 'Cancel',
+//         confirmButtonColor: isDarkMode ? '#dc2626' : '#ef4444', // Red color for both dark and light modes
+//         cancelButtonColor: isDarkMode ? '#6b7280' : '#1f2937', // Dark mode: Gray-600, Light mode: Gray-300
+//         background: isDarkMode ? '#1f2937' : '#fff', // Dark mode: Gray-800, Light mode: White
+//         color: isDarkMode ? '#f9fafb' : '#000', // Dark mode: Gray-50, Light mode: Black
+//         customClass: {
+//             confirmButton: `text-white ${isDarkMode ? 'bg-red-600 hover:bg-red-700 focus:ring-red-300' : 'bg-red-600 hover:bg-red-700 focus:ring-red-500'} font-medium rounded-lg text-sm px-6 py-2`,
+//             cancelButton: `text-white ${isDarkMode ? 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-300' : 'bg-gray-300 hover:bg-gray-400 focus:ring-gray-500'} font-medium rounded-lg text-sm px-6 py-2`,
+//             title: 'text-lg font-semibold',
+//             content: 'text-base'
+//         }
+//     });
+
+//     if (result.isConfirmed) {
+//         // Redirect to the URL after confirmation
+//         const url = `${baseURL}/user/contacts/delete/${id}`;
+
+
+//         // Show success message
+//         Swal.fire({
+//             title: 'Deleted!',
+//             text: 'The contact has been deleted.',
+//             icon: 'success',
+//             background: isDarkMode ? '#1f2937' : '#fff',
+//             color: isDarkMode ? '#f9fafb' : '#000',
+//             customClass: {
+//                 confirmButton: `text-white ${isDarkMode ? 'bg-red-600 hover:bg-red-700 focus:ring-red-300' : 'bg-red-600 hover:bg-red-700 focus:ring-red-500'} font-medium rounded-lg text-sm px-6 py-2`,
+//                 title: 'text-lg font-semibold',
+//                 content: 'text-base'
+//             }
+//         });
+
+//         window.location.replace(url);
+//     }
+
+//     /*
+//     if need to customize view after cancel
+//     else if (result.isDismissed) {
+//         Swal.fire({
+//             title: 'Cancelled',
+//             text: 'The contact was not deleted.',
+//             icon: 'info',
+//             background: isDarkMode ? '#1f2937' : '#fff',
+//             color: isDarkMode ? '#f9fafb' : '#000',
+//             customClass: {
+//                 confirmButton: `text-white ${isDarkMode ? 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-300' : 'bg-gray-800 hover:bg-gray-900 focus:ring-gray-500'} font-medium rounded-lg text-sm px-6 py-2`,
+//                 title: 'text-lg font-semibold',
+//                 content: 'text-base'
+//             }
+//         });
+//     }
+//     */
+
+// }
+
 async function deleteContact(id) {
     const isDarkMode = document.documentElement.classList.contains('dark'); // Detect dark mode
 
@@ -90,43 +152,48 @@ async function deleteContact(id) {
     });
 
     if (result.isConfirmed) {
-        // Redirect to the URL after confirmation
         const url = `${baseURL}/user/contacts/delete/${id}`;
 
-
-        // Show success message
-        Swal.fire({
-            title: 'Deleted!',
-            text: 'The contact has been deleted.',
-            icon: 'success',
-            background: isDarkMode ? '#1f2937' : '#fff',
-            color: isDarkMode ? '#f9fafb' : '#000',
-            customClass: {
-                confirmButton: `text-white ${isDarkMode ? 'bg-red-600 hover:bg-red-700 focus:ring-red-300' : 'bg-red-600 hover:bg-red-700 focus:ring-red-500'} font-medium rounded-lg text-sm px-6 py-2`,
-                title: 'text-lg font-semibold',
-                content: 'text-base'
+        // Perform AJAX request
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
             }
         });
 
-        window.location.replace(url);
-    }
+        if (response.ok) {
+            // Show success message
+            await Swal.fire({
+                title: 'Deleted!',
+                text: 'The contact has been deleted.',
+                icon: 'success',
+                background: isDarkMode ? '#1f2937' : '#fff',
+                color: isDarkMode ? '#f9fafb' : '#000',
+                customClass: {
+                    confirmButton: `text-white ${isDarkMode ? 'bg-red-600 hover:bg-red-700 focus:ring-red-300' : 'bg-red-600 hover:bg-red-700 focus:ring-red-500'} font-medium rounded-lg text-sm px-6 py-2`,
+                    title: 'text-lg font-semibold',
+                    content: 'text-base'
+                }
+            });
 
-    /*
-    if need to customize view after cancel
-    else if (result.isDismissed) {
-        Swal.fire({
-            title: 'Cancelled',
-            text: 'The contact was not deleted.',
-            icon: 'info',
-            background: isDarkMode ? '#1f2937' : '#fff',
-            color: isDarkMode ? '#f9fafb' : '#000',
-            customClass: {
-                confirmButton: `text-white ${isDarkMode ? 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-300' : 'bg-gray-800 hover:bg-gray-900 focus:ring-gray-500'} font-medium rounded-lg text-sm px-6 py-2`,
-                title: 'text-lg font-semibold',
-                content: 'text-base'
-            }
-        });
-    }
-    */
+            window.location.replace(`${baseURL}/user/contacts`);
 
+        } else {
+            // Handle failure response
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Failed to delete the contact.',
+                icon: 'error',
+                background: isDarkMode ? '#1f2937' : '#fff',
+                color: isDarkMode ? '#f9fafb' : '#000',
+                customClass: {
+                    confirmButton: `text-white ${isDarkMode ? 'bg-red-600 hover:bg-red-700 focus:ring-red-300' : 'bg-red-600 hover:bg-red-700 focus:ring-red-500'} font-medium rounded-lg text-sm px-6 py-2`,
+                    title: 'text-lg font-semibold',
+                    content: 'text-base'
+                }
+            });
+        }
+    }
 }
+

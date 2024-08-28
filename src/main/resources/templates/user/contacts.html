@@ -33,6 +33,7 @@
 
                     <div class="contacts_container">
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <div data-th-replace="~{message :: messagebox}"></div>
                             <form data-th-object="${contactSearchForm}" action=""
                                 data-th-action="@{'/user/contacts/search'}">
                                 <div
