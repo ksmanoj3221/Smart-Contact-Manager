@@ -225,6 +225,7 @@ public class ContactController {
         contactForm.setFavorite(contact.isFavorite());
         contactForm.setWebsiteLink(contact.getWebsiteLink());
         contactForm.setLinkedInLink(contact.getLinkedInLink());
+        contactForm.setPicture(contact.getPicture());
 
         model.addAttribute("contactForm", contactForm);
 
