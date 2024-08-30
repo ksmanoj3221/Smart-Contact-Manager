@@ -237,9 +237,14 @@ public class ContactController {
     public String updateContact(@PathVariable("contactId") String contactId,
             @Valid @ModelAttribute ContactForm contactForm,
             BindingResult bindingResult,
-            Model model) {
+            Model model,
+            HttpSession session) {
 
         // update the contact
+
+        if (bindingResult.hasErrors()) {
+            return "user/update_contact_view";
+        }
 
         var con = contactService.getById(contactId);
         con.setId(contactId);
@@ -252,13 +257,31 @@ public class ContactController {
         con.setWebsiteLink(contactForm.getWebsiteLink());
         con.setLinkedInLink(contactForm.getLinkedInLink());
 
+        // process image:
+
+        if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
+            logger.info("file is not empty");
+            String fileName = UUID.randomUUID().toString();
+            String imageUrl = imageService.uploadImage(contactForm.getContactImage(), fileName);
+            con.setCloudinaryImagePublicId(fileName);
+            con.setPicture(imageUrl);
+            contactForm.setPicture(imageUrl);
+
+        } else {
+            logger.info("file is empty");
+        }
+
         var updateCon = contactService.update(con);
         logger.info("updated contact {}", updateCon);
-        model.addAttribute("message", Message.builder().content("Contact Updated !!").type(MessageType.green).build());
+        session.setAttribute("message",
+                Message.builder()
+                        .content("You have successfully updated your contact")
+                        .type(MessageType.green)
+                        .build());
 
-        // return "redirect:/user/contacts/view/" + contactId;
+        return "redirect:/user/contacts/view/" + contactId;
 
-        return "redirect:/user/contacts";
+        // return "redirect:/user/contacts";
 
     }
 }
