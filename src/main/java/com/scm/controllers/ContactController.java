@@ -228,7 +228,18 @@ public class ContactController {
         contactForm.setPicture(contact.getPicture());
 
         model.addAttribute("contactForm", contactForm);
+        model.addAttribute("contactId", contactId);
 
         return "user/update_contact_view";
+    }
+
+    @RequestMapping(value = "/update/{contactId}", method = RequestMethod.POST)
+    public String updateContact(@PathVariable("contactId") String contactId,
+            @Valid @ModelAttribute ContactForm contactForm,
+            BindingResult bindingResult,
+            Model model) {
+
+        return "redirect:/user/contacts/view/" + contactId;
+
     }
 }
