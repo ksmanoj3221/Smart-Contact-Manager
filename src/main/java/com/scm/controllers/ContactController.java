@@ -240,48 +240,71 @@ public class ContactController {
             Model model,
             HttpSession session) {
 
-        // update the contact
-
         if (bindingResult.hasErrors()) {
             return "user/update_contact_view";
         }
 
-        var con = contactService.getById(contactId);
-        con.setId(contactId);
-        con.setName(contactForm.getName());
-        con.setEmail(contactForm.getEmail());
-        con.setPhoneNumber(contactForm.getPhoneNumber());
-        con.setAddress(contactForm.getAddress());
-        con.setDescription(contactForm.getDescription());
-        con.setFavorite(contactForm.isFavorite());
-        con.setWebsiteLink(contactForm.getWebsiteLink());
-        con.setLinkedInLink(contactForm.getLinkedInLink());
+        // Fetch the original contact details from the database
+        Contact originalContact = contactService.getById(contactId);
 
-        // process image:
+        // Compare original contact details with the submitted form values
+        boolean isChanged = false;
 
+        if (!originalContact.getName().equals(contactForm.getName())) {
+            isChanged = true;
+        }
+        if (!originalContact.getEmail().equals(contactForm.getEmail())) {
+            isChanged = true;
+        }
+        if (!originalContact.getPhoneNumber().equals(contactForm.getPhoneNumber())) {
+            isChanged = true;
+        }
+        if (!originalContact.getAddress().equals(contactForm.getAddress())) {
+            isChanged = true;
+        }
+        if (!originalContact.getDescription().equals(contactForm.getDescription())) {
+            isChanged = true;
+        }
+
+        // Process image
         if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
             logger.info("file is not empty");
             String fileName = UUID.randomUUID().toString();
             String imageUrl = imageService.uploadImage(contactForm.getContactImage(), fileName);
-            con.setCloudinaryImagePublicId(fileName);
-            con.setPicture(imageUrl);
+            originalContact.setCloudinaryImagePublicId(fileName);
+            originalContact.setPicture(imageUrl);
             contactForm.setPicture(imageUrl);
-
-        } else {
-            logger.info("file is empty");
+            isChanged = true; // Mark as changed if a new image is uploaded
         }
 
-        var updateCon = contactService.update(con);
+        // If no changes were made, return with a message
+        if (!isChanged) {
+            session.setAttribute("message", Message.builder()
+                    .content("No changes detected.")
+                    .type(MessageType.red)
+                    .build());
+            return "redirect:/user/contacts/view/" + contactId;
+        }
+
+        // Proceed with the update if changes are detected
+        originalContact.setName(contactForm.getName());
+        originalContact.setEmail(contactForm.getEmail());
+        originalContact.setPhoneNumber(contactForm.getPhoneNumber());
+        originalContact.setAddress(contactForm.getAddress());
+        originalContact.setDescription(contactForm.getDescription());
+        originalContact.setFavorite(contactForm.isFavorite());
+        originalContact.setWebsiteLink(contactForm.getWebsiteLink());
+        originalContact.setLinkedInLink(contactForm.getLinkedInLink());
+
+        var updateCon = contactService.update(originalContact);
         logger.info("updated contact {}", updateCon);
-        session.setAttribute("message",
-                Message.builder()
-                        .content("You have successfully updated your contact")
-                        .type(MessageType.green)
-                        .build());
+
+        session.setAttribute("message", Message.builder()
+                .content("You have successfully updated your contact")
+                .type(MessageType.green)
+                .build());
 
         return "redirect:/user/contacts/view/" + contactId;
-
-        // return "redirect:/user/contacts";
-
     }
+
 }
