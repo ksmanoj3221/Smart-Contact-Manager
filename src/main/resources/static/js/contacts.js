@@ -197,3 +197,12 @@ async function deleteContact(id) {
     }
 }
 
+function exportData() {
+    TableToExcel.convert(document.getElementById("contact-table"), {
+        name: "contacts.xlsx",
+        sheet: {
+            name: "Sheet 1",
+        },
+    });
+}
+
