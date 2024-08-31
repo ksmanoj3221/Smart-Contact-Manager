@@ -17,7 +17,7 @@ import com.scm.repositories.UserRepo;
 import com.scm.services.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
@@ -29,16 +29,16 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User saveUser(User user) {
-        // generate user id 
+        // generate user id
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         // Ensure enabled is set correctly
         logger.info("Setting enabled to: " + user.isEnabled());
-        user.setEnabled(true);
+        // user.setEnabled(true);
 
-        //set user role
+        // set user role
         user.setRoleList(List.of(AppConstants.ROLE_USER));
         logger.info(user.getProvider().toString());
         return userRepo.save(user);
@@ -51,7 +51,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Optional<User> updateUser(User user) {
-       User user2 =  userRepo.findById(user.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        User user2 = userRepo.findById(user.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         user2.setName(user.getName());
         user2.setEmail(user.getEmail());
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteUser(String id) {
-        User user2 =  userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        User user2 = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         userRepo.delete(user2);
     }
 

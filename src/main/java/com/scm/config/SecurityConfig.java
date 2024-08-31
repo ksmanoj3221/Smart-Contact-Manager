@@ -81,6 +81,7 @@ public class SecurityConfig {
             // formLogin.defaultSuccessUrl("/home");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
+
         });
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);

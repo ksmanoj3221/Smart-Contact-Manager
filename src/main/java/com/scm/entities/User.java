@@ -54,7 +54,7 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     @Getter(value = AccessLevel.NONE)
-    private boolean enabled = true;
+    private boolean enabled = false;
     private boolean emailVerified = false;
     private boolean phoneVerified = false;
 
@@ -102,7 +102,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 
     @Override
