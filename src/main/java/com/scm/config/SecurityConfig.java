@@ -50,6 +50,9 @@ public class SecurityConfig {
     @Autowired
     private OAuthAuthenicationSuccessHandler handler;
 
+    @Autowired
+    private AuthFailtureHandler authFailtureHandler;
+
     // configuration: authenticationProvider
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -82,6 +85,7 @@ public class SecurityConfig {
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
 
+            formLogin.failureHandler(authFailtureHandler);
         });
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
